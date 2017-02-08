@@ -4,9 +4,12 @@
  
 clear all;
 clc;
- 
-A = [4 1 0 1 0; -1 4 -1 0 1; 0 -1 4 -1 0; 1 0 -1 4 -1; 0 1 0 -1 4;]
-B = [100; 100; 100; 100; 100;]
+
+format short g; 
+%A = [4 1 0 1 0; -1 4 -1 0 1; 0 -1 4 -1 0; 1 0 -1 4 -1; 0 1 0 -1 4;]
+%B = [100; 100; 100; 100; 100;]
+A = [1 1 6; 1 9 -2; 8 2 -1;]
+B = [-61.3; 49.1; 185.8;]
 sz = size(A)(1);
 Aug = [A B zeros(sz, 1)];
  
@@ -64,6 +67,7 @@ while true
     Error = abs(Solution(:, 2) - Solution(:, 1));
 	if ((max(Error)<EPS) || (Iterations > 2000))
       	Iterations
+        Aug(:, 1:sz+1)
       	Solution(:, 2)
     	break
    	end
