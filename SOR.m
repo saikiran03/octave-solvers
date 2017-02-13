@@ -61,11 +61,11 @@ while true
   		
 		  rSolution(row, 2) = rSolution(row, 1) + Residue(row) / A(row, row);
 	  end
- 
-    Error = abs(rSolution(:, 2) - rSolution(:, 1));
+
+	  Error = abs(rSolution(:, 2) - rSolution(:, 1));
 	  if ((max(Error)<EPS) || (Iterations > 2000))
-      	break
-   	end
+      	  break
+   	  end
 end
 
 
@@ -88,12 +88,12 @@ for weight = 0.01:0.01:1.99
           Residue(row)  = Residue(row) - A(row, 1:row-1)*Solution(1:row-1, 2);
           Residue(row)  = Residue(row) - A(row, row:sz)*Solution(row:sz, 1);
           
-          Solution(row, 2) = Solution(row, 1) + weight * Residue(row) / A(row, row);
+          Solution(row, 2) = (1-weight) * Solution(row, 1) + weight * Residue(row) / A(row, row);
         end
         
         Error = abs(Solution(:, 2) - Solution(:, 1));
         if ((max(Error)<EPS) || (Iterations > 200))
-            differ = Solution(:, 2)==rSolution(:,2);
+            differ = Solution(:, 2) - rSolution(:,2);
             
             if ((minIterations > Iterations) && max(differ) < EPS)
                 minIterations = Iterations;
